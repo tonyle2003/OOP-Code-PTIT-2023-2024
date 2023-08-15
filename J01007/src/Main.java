@@ -31,7 +31,7 @@ public class Main {
     private static void init() {
         arrayFibo[0] = 1L;
         arrayFibo[1] = 1L;
-        for (int i = 2; i < arrayFibo.length; i++) {
+        for (int i = 2; i < 100; i++) {
             arrayFibo[i] = arrayFibo[i - 1] + arrayFibo[i - 2];
         }
     }
