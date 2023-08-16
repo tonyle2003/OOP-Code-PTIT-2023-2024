@@ -1,41 +1,52 @@
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
-    
+
     private static Scanner scanner = new Scanner(System.in);
     private static int test;
-    private static int n;
+    private static int number;
+    private static boolean[] primeNumber = new boolean[2000001];
     public static void main(String[] args) {
+        eratosthenesAlgorithm();
         test = scanner.nextInt();
         long sum = 0;
         while (test > 0) {
             test--;
-            n = scanner.nextInt();
-            Map<Integer, Integer> key = getMap();
-            for (Integer e : key.keySet()) {
-                sum += e * key.get(e);
+            number = scanner.nextInt();
+            if (primeNumber[number] == true) {
+                sum += number;
+            } else {
+                sum += getSumPrime();
             }
         }
         System.out.println(sum);
     }
 
-    private static Map<Integer, Integer> getMap() {
-        Map<Integer, Integer> newMap = new HashMap<>();
-        int current = 2;
-        while (n != 1) {
-            if (n % current == 0) {
-                n /= current;
-                if (newMap.containsKey(current) == false) {
-                    newMap.put(current, 1);
-                } else {
-                    newMap.replace(current, newMap.get(current) + 1);
-                }
-            } else {
-                current++;
+    private static long getSumPrime() {
+        long sum = 0;
+        for (int i = 2; i <= Math.sqrt(number); i++) {
+            while (number % i == 0) {
+                number /= i;
+                sum += i;
             }
         }
-        return newMap;
+        if (number != 1) {
+            sum += number;
+        }
+        return sum;
+    }
+
+    private static void eratosthenesAlgorithm() {
+        for (int i = 0; i < 2000001; i++) {
+            primeNumber[i] = true;
+        }
+        primeNumber[0] = primeNumber[1] = false;
+        for (int i = 2; i * i < 2000001; i++) {
+            if (primeNumber[i] == true) {
+                for (int j = i * i; j < 2000001; j += i) {
+                    primeNumber[j] = false;
+                }
+            }
+        }
     }
 }
