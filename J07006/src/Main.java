@@ -9,6 +9,7 @@ public class Main {
     static Map<Integer, Integer> numbers = new TreeMap<>();
     static ArrayList<Integer> listNumber;
 
+    @SuppressWarnings("unchecked")
     public static void main(String[] args) {
         try {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("DATA.in"));

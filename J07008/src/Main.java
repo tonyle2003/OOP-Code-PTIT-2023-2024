@@ -1,17 +1,22 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class Main {
-    static Set<String> result = new TreeSet<>();
+    static List<String> result = new ArrayList<>();
     static int size;
+    static String[] data;
     static int[] binary;
     static int[] array;
     static boolean isEnd = false;
-    static Scanner scanner = new Scanner(System.in);
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
+        Scanner scanner = new Scanner(new FileInputStream("DAYSO.in"));
+        size = Integer.parseInt(scanner.nextLine());
+        data = scanner.nextLine().split(" ");
         getTest();
         while (!isEnd) {
             if (isIncrease()) {
@@ -19,6 +24,7 @@ public class Main {
             }
             generate();
         }
+        result.sort(Comparator.naturalOrder());
         result.forEach(e -> System.out.println(e));
     }
 
@@ -29,17 +35,18 @@ public class Main {
                 temp += array[i] + " ";
             }
         }
-        result.add(temp);
+        if (temp.equals("") == false) {
+            result.add(temp);
+        }
     }
 
     static void getTest() {
-        size = scanner.nextInt();
-        binary = new int[size];
         array = new int[size];
         for (int i = 0; i < array.length; i++) {
-            array[i] = scanner.nextInt();
-            binary[i] = 0;
+            array[i] = Integer.parseInt(data[i] + "");
         }
+        binary = new int[size];
+        Arrays.fill(binary, 0);
     }
 
     static boolean isIncrease() {
@@ -49,8 +56,8 @@ public class Main {
                 numbers.add(array[i]);
             }
         }
-        for (int i = 0; i < numbers.size() - 1; i++) {
-            if (numbers.get(i) > numbers.get(i + 1)) {
+        for (int i = 0; i <= numbers.size() - 2; i++) {
+            if (numbers.get(i) >= numbers.get(i + 1)) {
                 return false;
             }
         }
