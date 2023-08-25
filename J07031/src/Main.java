@@ -20,7 +20,7 @@ public class Main {
             if (e * 2 > 1000000) {
                 break;
             }
-            if (elements2.contains(1000000 - e)) {
+            if (!elements2.contains(e) && !elements2.contains(1000000 - e) && elements1.contains(1000000 - e)) {
                 System.out.println(e + " " + (1000000 - e));
             }
         }
