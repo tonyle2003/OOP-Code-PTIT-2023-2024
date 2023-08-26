@@ -5,43 +5,44 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class Main {
-    static final String FILE_NAME = "MONHOC.in";
+    static final String FILE_NAME = "DN.in";
     static int n;
-    static Set<Subject> subjects = new TreeSet<>();
+    static Set<Company> companies = new TreeSet<>();
+
     public static void main(String[] args) throws FileNotFoundException {
         Scanner scanner = new Scanner(new FileInputStream(FILE_NAME));
         n = Integer.parseInt(scanner.nextLine());
         while (n > 0) {
             n--;
-            subjects.add(new Subject(
+            companies.add(new Company(
                 scanner.nextLine(), 
                 scanner.nextLine(), 
                 Integer.parseInt(scanner.nextLine())
             ));
         }
-        subjects.forEach(e -> System.out.println(e));
+        companies.forEach(e -> System.out.println(e));
     }
 }
 
-class Subject implements Comparable<Subject> {
-
+class Company implements Comparable<Company> {
     private String id;
     private String name;
-    private int credit;
+    private int slot;
 
-    public Subject(String id, String name, int credit) {
+    public Company(String id, String name, int slot) {
         this.id = id;
         this.name = name;
-        this.credit = credit;
+        this.slot = slot;
     }
 
     @Override
     public String toString() {
-        return id + " " + name + " " + credit;
+        return id + " " + name + " " + slot;
     }
 
     @Override
-    public int compareTo(Subject object) {
-        return this.name.compareTo(object.name);
+    public int compareTo(Company other) {
+        return this.id.compareTo(other.id);
     }
+
 }
